@@ -61,3 +61,11 @@ download(path, "Weather_Data.csv")
 filename = "Weather_Data.csv"
 df = pd.read_csv(filename)
 df.head()
+
+
+## Pre-Processing  ##
+# performing "one hot encoding" to convert categorical variables to numerical variables
+df_sydney_processed = pd.get_dummies(data=df, columns=['RainToday', 'WindGustDir', 'WindDir9am', 'WindDir3pm'])
+# converting target column 'RainTomorrow'
+df_sydney_processed.replace(['No', 'Yes'], [0,1], inplace=True)
+
