@@ -107,3 +107,17 @@ print("KNN Model, Accuracy Score: ", KNN_Accuracy_Score)
 print("KNN Model, Jaccard Index: ", KNN_Jaccard_Score)
 print("KNN Model, F1-Score: ", KNN_F1_Score)
 
+
+#### Decision Tree Modeling ####
+Tree = DecisionTreeClassifier(criterion='entropy', max_depth=5) # creates model
+print(Tree) # default parameters
+Tree.fit(x_train, y_train) # trains the model
+predictions = Tree.predict(x_test) # predicts on test set
+# Evaluating results
+Tree_Accuracy_Score = metrics.accuracy_score(y_test, predictions)
+Tree_Jaccard_Score = jaccard_score(y_test, predictions, pos_label=0)
+Tree_F1_Score = f1_score(y_test, predictions, average='weighted')
+print("Decision Tree Model, Accuracy Score: ", Tree_Accuracy_Score)
+print("Decision Tree Model, Jaccard Index: ", Tree_Jaccard_Score)
+print("Decision Tree Model, F1-Score: ", Tree_F1_Score)
+
