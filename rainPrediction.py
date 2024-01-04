@@ -49,3 +49,15 @@ from sklearn.metrics import confusion_matrix, accuracy_score
 import sklearn.metrics as metrics
 
 
+## Downloading the dataset ##
+import urllib.request
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context  #workaround for SSL certificate verification
+def download(url, filename):
+    urllib.request.urlretrieve(url, filename)
+    print("Download Complete")
+path='https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ML0101EN-SkillUp/labs/ML-FinalAssignment/Weather_Data.csv'
+download(path, "Weather_Data.csv")
+filename = "Weather_Data.csv"
+df = pd.read_csv(filename)
+df.head()
