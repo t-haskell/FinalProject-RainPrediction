@@ -112,7 +112,7 @@ print("KNN Model, F1-Score: ", KNN_F1_Score)
 Tree = DecisionTreeClassifier(criterion='entropy', max_depth=5) # creates model
 print(Tree) # default parameters
 Tree.fit(x_train, y_train) # trains the model
-predictions = Tree.predict(x_test) # predicts on test set
+predictions = Tree.predict(x_test) # PREDICT on test set
 # Evaluating results
 Tree_Accuracy_Score = metrics.accuracy_score(y_test, predictions)
 Tree_Jaccard_Score = jaccard_score(y_test, predictions, pos_label=0)
@@ -125,8 +125,8 @@ print("Decision Tree Model, F1-Score: ", Tree_F1_Score)
 #### Logistic Regression Modeling ####
 x_train, x_test, y_train, y_test = train_test_split(features, Y, test_size=0.2, random_state=1)
 LR = LogisticRegression(C=0.01,solver='liblinear').fit(x_train, y_train) # creates the model
-predictions = LR.predict(x_test) # predicts on test set
-predict_proba = LR.predict_proba(x_test) # predicts on test set
+predictions = LR.predict(x_test) # PREDICT on test set
+predict_proba = LR.predict_proba(x_test) # predicts probability on test set
 # Evaluating results
 LR_Accuracy_Score = metrics.accuracy_score(y_test, predictions)
 LR_Jaccard_Score = jaccard_score(y_test, predictions, pos_label=0)
@@ -136,4 +136,23 @@ print("Logistic Regression Model, Accuracy Score: ", LR_Accuracy_Score)
 print("Logistic Regression Model, Jaccard Index: ", LR_Jaccard_Score)
 print("Logistic Regression Model, F1-Score: ", LR_F1_Score)
 print("Logistic Regression Model, LogLoss: ", LR_Log_Loss)
+
+
+#### SVM Modeling ####
+SVM = svm.SVC(kernel='linear').fit(x_train, y_train) # creates and trains the model
+predictions = SVM.predict(x_test) # predicts on test set
+# Evaluating results
+SVM_Accuracy_Score = metrics.accuracy_score(y_test, predictions)
+SVM_Jaccard_Score = jaccard_score(y_test, predictions, pos_label=0)
+SVM_F1_Score = f1_score(y_test, predictions, average='weighted')
+print("SVM Model, Accuracy Score: ", SVM_Accuracy_Score)
+print("SVM Model, Jaccard Index: ", SVM_Jaccard_Score)
+print("SVM Model, F1-Score: ", SVM_F1_Score)
+
+
+#### Reporting Results ####
+# creating a data frame to represent each model and its accuracy metrics
+Report = pd.DataFrame({'Model' : ['Linear Regression', 'KNN', 'Decision Tree', 'Logistic Regression', 'SVM'], 'Accuracy': [LinearRegression_MAE, KNN_Accuracy_Score, Tree_Accuracy_Score, LR_Accuracy_Score, SVM_Accuracy_Score], 'Jaccard Index': [LinearRegression_MSE, KNN_Jaccard_Score, Tree_Jaccard_Score, LR_Jaccard_Score, SVM_Jaccard_Score], 'F1-Score': [LinearRegression_R2, KNN_F1_Score, Tree_F1_Score, LR_F1_Score, SVM_F1_Score], 'LogLoss': [0,0,0,LR_Log_Loss,0]})
+print(Report)
+
 
