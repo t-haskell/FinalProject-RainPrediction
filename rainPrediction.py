@@ -121,3 +121,19 @@ print("Decision Tree Model, Accuracy Score: ", Tree_Accuracy_Score)
 print("Decision Tree Model, Jaccard Index: ", Tree_Jaccard_Score)
 print("Decision Tree Model, F1-Score: ", Tree_F1_Score)
 
+
+#### Logistic Regression Modeling ####
+x_train, x_test, y_train, y_test = train_test_split(features, Y, test_size=0.2, random_state=1)
+LR = LogisticRegression(C=0.01,solver='liblinear').fit(x_train, y_train) # creates the model
+predictions = LR.predict(x_test) # predicts on test set
+predict_proba = LR.predict_proba(x_test) # predicts on test set
+# Evaluating results
+LR_Accuracy_Score = metrics.accuracy_score(y_test, predictions)
+LR_Jaccard_Score = jaccard_score(y_test, predictions, pos_label=0)
+LR_F1_Score = f1_score(y_test, predictions, average='weighted')
+LR_Log_Loss = log_loss(y_test, predictions)
+print("Logistic Regression Model, Accuracy Score: ", LR_Accuracy_Score)
+print("Logistic Regression Model, Jaccard Index: ", LR_Jaccard_Score)
+print("Logistic Regression Model, F1-Score: ", LR_F1_Score)
+print("Logistic Regression Model, LogLoss: ", LR_Log_Loss)
+
