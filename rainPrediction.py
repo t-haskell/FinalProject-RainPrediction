@@ -69,3 +69,11 @@ df_sydney_processed = pd.get_dummies(data=df, columns=['RainToday', 'WindGustDir
 # converting target column 'RainTomorrow'
 df_sydney_processed.replace(['No', 'Yes'], [0,1], inplace=True)
 
+
+## Train/Test Splitting ##
+df_sydney_processed.drop('Date',axis=1,inplace=True)
+df_sydney_processed = df_sydney_processed.astype(float)
+features = df_sydney_processed.drop(columns='RainTomorrow', axis=1) # setting feature variable
+Y = df_sydney_processed['RainTomorrow'] # setting target variable
+x_train, x_test, y_train, y_test = train_test_split(features, Y, test_size=0.2, random_state=10)
+
