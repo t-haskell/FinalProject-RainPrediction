@@ -94,3 +94,16 @@ print("Linear Regression, R2 Score: ", LinearRegression_R2)
 # Showing results in tabular format as a data frame
 Report = pd.DataFrame({'Model' : ['Linear Regression'], 'MAE': [LinearRegression_MAE], 'MSE': [LinearRegression_MSE], 'R2': [LinearRegression_R2]})
 print(Report)
+
+
+#### KNN Modeling ####
+KNN = KNeighborsClassifier(n_neighbors=4).fit(x_train, y_train) # creates and trains the model
+predictions = KNN.predict(x_test) # predicts on test set
+# Evaluating results
+KNN_Accuracy_Score = metrics.accuracy_score(y_test, predictions)
+KNN_Jaccard_Score = jaccard_score(y_test, predictions, pos_label=0)
+KNN_F1_Score = f1_score(y_test, predictions, average='weighted')
+print("KNN Model, Accuracy Score: ", KNN_Accuracy_Score)
+print("KNN Model, Jaccard Index: ", KNN_Jaccard_Score)
+print("KNN Model, F1-Score: ", KNN_F1_Score)
+
