@@ -77,3 +77,20 @@ features = df_sydney_processed.drop(columns='RainTomorrow', axis=1) # setting fe
 Y = df_sydney_processed['RainTomorrow'] # setting target variable
 x_train, x_test, y_train, y_test = train_test_split(features, Y, test_size=0.2, random_state=10)
 
+
+#### Linear Regression Modeling ####
+LinearReg = LinearRegression() # creates the model
+x = np.asanyarray(x_train)
+y = np.asanyarray(y_train)
+LinearReg.fit(x,y) # trains the model
+predictions = LinearReg.predict(x_test) # predicts on test set
+# Evaluating results
+LinearRegression_MAE = np.mean(np.abs(predictions - y_test))
+LinearRegression_MSE = np.mean((predictions - y_test) ** 2)
+LinearRegression_R2 = metrics.r2_score(y_test, predictions)
+print("Linear Regression, Mean Absolute Error: ", LinearRegression_MAE)
+print("Linear Regression, Mean Squared Error: ", LinearRegression_MSE)
+print("Linear Regression, R2 Score: ", LinearRegression_R2)
+# Showing results in tabular format as a data frame
+Report = pd.DataFrame({'Model' : ['Linear Regression'], 'MAE': [LinearRegression_MAE], 'MSE': [LinearRegression_MSE], 'R2': [LinearRegression_R2]})
+print(Report)
