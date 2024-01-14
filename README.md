@@ -74,5 +74,13 @@ The dataset used in this project can be found [here](https://cf-courses-data.s3.
 
 The project script implements each algorithm, trains the models, makes predictions, and evaluates the results using the specified metrics. The final results are summarized in a tabular format.
 
+## Results
+
+A DataFrame was created to show the evaluation metrics for each model in a simplified format, as can be seen below:
+<br>
+![Results](https://github.com/t-haskell/FinalProject-RainPrediction/blob/master/IBM-FinalResults.png?raw=true "Evaluation Metrics")
+
 This project provides practical experience in applying machine learning algorithms and assessing their performance using various evaluation metrics.
-```
+
+
+
